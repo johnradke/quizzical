@@ -1,0 +1,29 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Quizzic.al</title>
+    <link rel="stylesheet" type="text/css" href="quizzical.css">
+</head>
+
+<div id="question">
+    What is 45° <span class="unit">Celsius</span> in <span class="unit">Fahrenheit</span>?
+</div>
+
+<div id="answerDiv">
+    <ul id="answerList">
+        <li class="answer">20°</li>
+        <li class="answer">56°</li>
+        <li class="answer">97°</li>
+        <li class="answer">113°</li>
+    </ul>
+</div>
+
+<footer>Copyright ©<span id="year">blah</span> <a href="http://www.johnradke.net">John Radke</a></footer>
+<script src="bedrock.js"></script>
+<script src="quizzical.js"></script>
+<script>
+    $.ready(function() {
+        $.id('year').textContent = new Date().getFullYear();
+    });
+</script>
+</html>
