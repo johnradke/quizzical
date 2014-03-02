@@ -13,6 +13,12 @@ body {
     font-weight: bolder;
 }
 
+#quiz {
+    transition: opacity .4s;
+    -moz-transition: opacity .4s;
+    -webkit-transition: opacity .4s;
+}
+
 footer {
     position: absolute;
     left: 0;
@@ -33,9 +39,14 @@ span.unit {
     color: #66d;
 }
 
+#answerDiv {
+    display: inline-block;
+    max-width: 644px;
+}
+
 ul#answerList {
-    width: 650px;
-    margin: auto;
+    margin: 0;
+    padding: 0;
 }
 
 li.answer {
@@ -43,15 +54,21 @@ li.answer {
     float: left;
     padding: 25px;
     margin:20px;
-    border-width: 5px;
+    border-width: 6px;
     border-style: solid;
     border-radius: 20px;
-    width:200px;
+    border-color: #333;
+    width:220px;
     cursor: pointer;
+    transition: background .15s;
+    -moz-transition: background .15s;
+    -webkit-transition: background .15s;
+    transition: color .15s;
+    -moz-transition: color .15s;
+    -webkit-transition: color .15s;
 }
 
 li.answer:hover {
     color: #eeeef5;
     background: #333;
-    border-color: #333;
 }

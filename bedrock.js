@@ -34,10 +34,6 @@ var $ = function() {
         return r;
     }
 
-    function _ready(f) {
-        document.addEventListener('DOMContentLoaded', f);
-    }
-
     function _rand(start, stop) {
         if (!stop) {
             stop = start;
@@ -47,6 +43,50 @@ var $ = function() {
         return Math.floor(Math.random() * (stop - start) + start);
     }
 
+    function _randExclude(start, stop, exclusions) {
+        // if there's only one exclusion, make an array of one
+        exclusions.numSort();
+        var realEx = [];
+        exclusions.forEach(function(x) {
+            if (x >= start && x < stop)
+                realEx.push(x);
+        });
+
+        var value = _rand(start, stop - realEx.length);
+
+        realEx.forEach(function(x) {
+            if (value < x) {
+                return value;
+            }
+            value ++;
+        });
+
+        return value;
+    }
+
+    function _test(message, fn) {
+        var tests = document.getElementById('bedrock-tests');
+        if (tests === null) {
+            tests = document.createElement('ol');
+            tests.id = 'bedrock-tests';
+            _body.appendChild(tests);
+        }
+
+        var test = document.createElement('li');
+        var state = document.createElement('span');
+        if (fn()) {
+            state.style.color = 'green';
+            state.textContent = 'Pass';
+        } else {
+            state.style.color = 'red';
+            state.textContent = 'FAIL';
+        }
+
+        test.appendChild(state);
+        test.appendText(' - ' + message);
+        tests.appendChild(test);
+    }
+
     return {
         id: _id,
         html: _html,
@@ -54,7 +94,8 @@ var $ = function() {
         go: _go,
         range: _range,
         rand: _rand,
-        ready: _ready
+        randExclude: _randExclude,
+        test: _test
     };
 }();
 
@@ -99,5 +140,26 @@ Array.extend({
         return this.map(function(n){
             return n * multiplier;
         });
+    },
+    numSort: function() {
+        this.sort(function(a, b) { return a - b; });
     }
 });
+
+String.extend ({
+    format: function() {
+        var args = arguments;
+        return this.replace(/{(\d+)}/g, function(match, number) { 
+          return typeof args[number] != 'undefined'
+            ? args[number]
+            : match
+          ;
+        });
+    }
+});
+
+HTMLElement.extend ({
+    appendText: function(text) {
+        this.appendChild(document.createTextNode(text));
+    }
+})
