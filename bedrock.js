@@ -10,6 +10,10 @@ var $ = function() {
         return _ids[id];
     }
 
+    function _cl(cl) {
+        return document.getElementsByClassName(cl);
+    }
+
     var _html = document.getElementsByTagName('html')[0];
     var _body = document.getElementsByTagName('body')[0];
 
@@ -48,8 +52,9 @@ var $ = function() {
         exclusions.numSort();
         var realEx = [];
         exclusions.forEach(function(x) {
-            if (x >= start && x < stop)
+            if (x >= start && x < stop && realEx.indexOf(x) < 0) {
                 realEx.push(x);
+            }
         });
 
         var value = _rand(start, stop - realEx.length);
@@ -89,6 +94,7 @@ var $ = function() {
 
     return {
         id: _id,
+        cl: _cl,
         html: _html,
         body: _body,
         go: _go,
@@ -143,6 +149,9 @@ Array.extend({
     },
     numSort: function() {
         this.sort(function(a, b) { return a - b; });
+    },
+    pushArray: function(array) {
+        Array.prototype.push.apply(this, array);
     }
 });
 
@@ -161,5 +170,14 @@ String.extend ({
 HTMLElement.extend ({
     appendText: function(text) {
         this.appendChild(document.createTextNode(text));
+    },
+    removeAll: function() {
+        while(this.firstChild) {
+            this.removeChild(this.firstChild);
+        }
+    },
+    setText: function(text) {
+        this.removeAll();
+        this.appendText(text);
     }
 })

@@ -34,7 +34,7 @@ div#question {
     margin-bottom: 60px;
 }
 
-span.unit {
+span#newUnit {
     font-weight: bold;
     color: #66d;
 }
@@ -60,12 +60,21 @@ li.answer {
     border-color: #333;
     width:220px;
     cursor: pointer;
+
     transition: background .15s;
     -moz-transition: background .15s;
     -webkit-transition: background .15s;
+    
     transition: color .15s;
     -moz-transition: color .15s;
     -webkit-transition: color .15s;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 li.answer:hover {
