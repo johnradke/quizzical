@@ -7,7 +7,11 @@
 <body>
     <div id="quiz">
         <div id="question">
-            What is <span id="query">45</span><span id="oldUnit">°C</span> in <span id="newUnit">Fahrenheit</span>?
+            What is <span class="highlight" id="query">45</span><span id="oldUnit" class="highlight">°C</span> in <span id="newUnit" class="highlight">Fahrenheit</span>?
+        </div>
+
+        <div id="score">
+            Score: <span id="correct">0</span> of <span id="total">0</span> (<span id="percent">0</span>%)
         </div>
 
         <div id="answerDiv">
@@ -16,6 +20,9 @@
                 <li class="answer">56°F</li>
                 <li class="answer">97°F</li>
                 <li class="answer">113°F</li>
+                <li class="answer" style="background:#00bb00;">
+                    <img src="checkmark.png" style="display:block; margin-left: auto; margin-right: auto;"/>
+                </li>
             </ul>
         </div>
     </div>

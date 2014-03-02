@@ -53,7 +53,6 @@ var q = function() {
                     ansEls[i].setText(ans + props.unitAbbrevs[0]);
                 });
             }
-
             
             $.id('quiz').style.opacity = 1;
         }, 400);
