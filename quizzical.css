@@ -51,6 +51,7 @@ ul#answerList {
 
 #score {
     font-size: 30px;
+    font-weight: normal;
 }
 
 li.answer {
@@ -66,7 +67,6 @@ li.answer {
     cursor: pointer;
 
 
-    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwOCIgdmlld0JveD0iODUgMTQ1IDQ1MCA0MDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjxwYXRoIHN0eWxlPSJmaWxsOiNlZWVlZjU7ZmlsbC1vcGFjaXR5OjE7ZmlsbC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlOm5vbmU7c3Ryb2tlLXdpZHRoOjFweDtzdHJva2UtbGluZWNhcDpidXR0O3N0cm9rZS1saW5lam9pbjptaXRlcjtzdHJva2Utb3BhY2l0eToxIiBkPSJNIDUwOC43NDQ3NywyMjYuOTkwMTUgQyA0NTkuNDIxODksMTkzLjE3MjM0IDQzNi4wODU1OSwxNjMuNTk1NjMgNDM2LjA4NTU5LDE2My41OTU2MyBDIDM0NC45OTk4NCwyMTcuMjY2MjYgMjQ4LjI2NzU3LDQwNy44MzcxOSAyNDguMjY3NTcsNDA3LjgzNzE5IEMgMjAyLjkzNDU0LDM0NC4wMTkzOSAxNTcuMzUzODQsMzI2LjIxOTMyIDE1Ny4zNTM4NCwzMjYuMjE5MzIgQyAxMzYuODYyMzYsMzUzLjYwMTEyIDEwMS41NDA5MSwzOTAuMDkzMTYgMTAxLjU0MDkxLDM5MC4wOTMxNiBDIDE4My45MjQsNDEyLjI4MDYyIDI1My4wNzMyMyw0OTMuNzAwMTUgMjUzLjA3MzIzLDQ5My43MDAxNSBDIDQwMi41NTcxLDI1OS4wMTMyMiA1MDguNzQ0NzcsMjI2Ljk5MDE1IDUwOC43NDQ3NywyMjYuOTkwMTUgeiAiIC8+PC9zdmc+");
 
     transition: background .15s;
     -moz-transition: background .15s;
@@ -87,6 +87,23 @@ li.answer {
 li.answer:hover {
     color: #eeeef5;
     background: #333;
+}
+
+li.winner {
+    background: #0b3 url("checkmark.svg") no-repeat center center;
+    background-size: 140px 140px;
+    border-color: #0b3;
+    /*color: #eeeef5;*/
+}
+
+li.loser {
+    background: #e34 url("x.svg") no-repeat center center;
+    background-size: 140px 140px;
+    border-color: #e34
+    /*color: #eeeef5;*/
+}
+
+#checkmark {
 }
 
 
