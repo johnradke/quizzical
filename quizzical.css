@@ -2,7 +2,7 @@ html {
     position: relative;
     min-height: 100%;
     background: #eeeef5;
-    color: #333;
+    color: #336;
 }
 
 body {
@@ -62,7 +62,7 @@ li.answer {
     border-width: 6px;
     border-style: solid;
     border-radius: 20px;
-    border-color: #333;
+    border-color: #336;
     width:220px;
     cursor: pointer;
 
@@ -84,9 +84,9 @@ li.answer {
     user-select: none;
 }
 
-li.answer:hover {
+li.answer:hover:not(.winner):not(.loser):not(.notclicked) {
     color: #eeeef5;
-    background: #333;
+    background: #336;
 }
 
 li.winner {
@@ -96,11 +96,20 @@ li.winner {
     /*color: #eeeef5;*/
 }
 
+li.winner:hover, li.loser:hover, li.notclicked:hover {
+    cursor: default;
+}
+
 li.loser {
     background: #e34 url("x.svg") no-repeat center center;
     background-size: 140px 140px;
     border-color: #e34
     /*color: #eeeef5;*/
+}
+
+li.notclicked {
+    border-color: #bbc;
+    color: #bbc;
 }
 
 #checkmark {
