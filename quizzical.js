@@ -1,4 +1,4 @@
-var q = function() {
+var qz = function() {
     var quizzes = [
         {
             name: 'Temperature',
@@ -11,7 +11,7 @@ var q = function() {
     ];
 
     var spacingMultiplier = .02;
-    var spreadMultiplier = .2;
+    var spreadMultiplier = .05;
 
     function newQuestion(props) {
         $.id('quiz').style.opacity = 0;
@@ -37,22 +37,34 @@ var q = function() {
             answers.sort(function(a, b) { return a - b; });
 
             var ansEls = $.cl('answer');
-            if ($.rand(2) === 0) {
-                $.id('query').setText(target);
-                $.id('oldUnit').setText(props.unitAbbrevs[0]);
-                $.id('newUnit').setText(props.units[1]);
-                answers.forEach(function(ans, i) {
-                    ansEls[i].setText(props.convert(ans) + props.unitAbbrevs[1]);
-                });
+            var q, a;
+            var u = $.rand(2);
+            if (u === 0) {
+                q = function(x) { return x; };
+                a = props.convert;
             }
             else {
-                $.id('query').setText(props.convert(target));
-                $.id('oldUnit').setText(props.unitAbbrevs[1]);
-                $.id('newUnit').setText(props.units[0]);
-                answers.forEach(function(ans, i) {
-                    ansEls[i].setText(ans + props.unitAbbrevs[0]);
-                });
+                q = props.convert;
+                a = function(x) { return x; };
             }
+
+            $.id('query').setText(q(target));
+            $.id('oldUnit').setText(props.unitAbbrevs[u]);
+            $.id('newUnit').setText(props.units[1 - u]);
+            answers.forEach(function(ans, i) {
+                ansEls[i].setText(a(ans) + props.unitAbbrevs[1 - u]);
+                
+                if (ans === target)
+                    ansEls[i].classList.add('winner');
+                else
+                    ansEls[i].classList.add('loser');
+                
+                ansEls[i].onclick = function() {
+                    ansEls.forEach(function(el, i) {
+                        el.classList.add('answered');
+                    });
+                }
+            });
             
             $.id('quiz').style.opacity = 1;
         }, 400);

@@ -11,7 +11,7 @@ var $ = function() {
     }
 
     function _cl(cl) {
-        return document.getElementsByClassName(cl);
+        return document.getElementsByClassName(cl).toArray();
     }
 
     var _html = document.getElementsByTagName('html')[0];
@@ -155,7 +155,7 @@ Array.extend({
     }
 });
 
-String.extend ({
+String.extend({
     format: function() {
         var args = arguments;
         return this.replace(/{(\d+)}/g, function(match, number) { 
@@ -164,6 +164,28 @@ String.extend ({
             : match
           ;
         });
+    }
+});
+
+NodeList.extend({
+    toArray: function() {
+        // http://jsperf.com/nodelist-to-array
+        var arr = [];
+        for (var i = 0, ref = arr.length = this.length; i < ref; i++) {
+            arr[i] = this[i];
+        }
+        return arr;
+    }
+});
+
+HTMLCollection.extend({
+    toArray: function() {
+        // http://jsperf.com/nodelist-to-array
+        var arr = [];
+        for (var i = 0, ref = arr.length = this.length; i < ref; i++) {
+            arr[i] = this[i];
+        }
+        return arr;
     }
 });
 
