@@ -81,37 +81,38 @@ li.choice {
     user-select: none;
 }
 
-li.choice:hover:not(.answered) {
+#quiz:not(.answered) li.choice:hover {
     color: #eeeef5;
     background: #336;
     cursor: pointer;
 }
 
-li.winner.answered:not(.selected) {
-    background: #7da url("checkmark.svg") no-repeat center center;
+#quiz.answered li.winner {
+    background: url("checkmark.svg") no-repeat center center;
     background-size: 140px 140px;
-    border-color: #7da;
 }
 
-li.winner.answered.selected {
-    background: #0b3 url("checkmark.svg") no-repeat center center;
-    background-size: 140px 140px;
+#quiz.answered li.winner.selected {
+    background-color: #0b3;
     border-color: #0b3;
 }
 
-li.loser.answered:not(.selected) {
-    background: #eab url("x.svg") no-repeat center center;
-    background-size: 140px 140px;
-    border-color: #eab
+#quiz.answered li.winner:not(.selected) {
+    background-color: #7da;
+    border-color: #7da;
 }
 
-li.loser.answered.selected {
-    background: #e34 url("x.svg") no-repeat center center;
+#quiz.answered li.loser {
+    background: url("x.svg") no-repeat center center;
     background-size: 140px 140px;
-    border-color: #e34
 }
 
-li.notclicked {
-    border-color: #bbc;
-    color: #bbc;
+#quiz.answered li.loser.selected {
+    background-color: #e34;
+    border-color: #e34;
+}
+
+#quiz.answered li.loser:not(.selected) {
+    background-color: #eab;
+    border-color: #eab;
 }

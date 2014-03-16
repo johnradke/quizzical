@@ -56,9 +56,7 @@ var qz = function() {
                 
                 choiceEls[i].onclick = function() {
                     this.classList.add('selected');
-                    choiceEls.forEach(function(el, i) {
-                        el.classList.add('answered');
-                    });
+                    $.id('quiz').classList.add('answered');
                 }
             });
             
