@@ -11,45 +11,14 @@
         var r = $.range(0, 2);
         return r.length = 2 && r[0] === 0 && r[1] === 1;
     });
-    $.test('5000 runs of rand(2) should only ever return 0 or 1 and return each at least once', function() {
-        var zero = false;
-        var one = false;
-        for (var i = 0; i < 5000; i++) {
-            var r = $.rand(2);
-            switch(r) {
-                case 0:
-                    zero = true;
-                    break;
-                case 1:
-                    one = true;
-                    break;
-                default:
-                    return false;
-            }
-        }
-
-        return (zero && one);
+    $.test('5000 runs of rand(2) should only ever return 0 or 1', 5000, function() {
+        return $.rand(2).in([0, 1]);
     });
-    $.test('5000 runs of randExclude(1, 11, [-2, 1, 5, 9, 5, 10, 5, 56]) should never yield 1, 5, 9, or 10', function() {
-        var counts = [];
-        for (var i = 1; i <= 10; i++) {
-            counts[i] = 0;
-        }
-        for (var i = 0; i < 5000; i++) {
-            var r = $.randExclude(1, 11, [-2, 1, 5, 9, 5, 10, 5, 56]);
-            counts[r]++;
-        }
 
-        return counts[1] === 0 && 
-               counts[2] > 0 && 
-               counts[3] > 0 && 
-               counts[4] > 0 && 
-               counts[5] === 0 && 
-               counts[6] > 0 && 
-               counts[7] > 0 &&
-               counts[8] > 0 &&
-               counts[9] === 0 &&
-               counts[10] === 0;
+    $.test('5000 runs of randExclude(1, 11, [-2, 1, 5, 9, 5, 10, 5, 56]) should never yield 1, 5, 9, or 10', 5000, function() {
+
+        return $.randExclude(1, 11, [-2, 1, 5, 9, 5, 10, 5, 56])
+            .in([2, 3, 4, 6, 7, 8]);
     });
 </script>
 </html>

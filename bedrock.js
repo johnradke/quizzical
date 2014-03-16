@@ -31,7 +31,7 @@ var $ = function() {
         
         var r = [];
 
-        for (var i = start; i <= stop; i += step) {
+        for (var i = start; i < stop; i += step) {
             r.push(i);
         }
 
@@ -69,7 +69,12 @@ var $ = function() {
         return value;
     }
 
-    function _test(message, fn) {
+    function _test(message, times, fn) {
+        if (times instanceof Function) {
+            fn = times;
+            times = 1;
+        }
+
         var tests = document.getElementById('bedrock-tests');
         if (tests === null) {
             tests = document.createElement('ol');
@@ -79,7 +84,9 @@ var $ = function() {
 
         var test = document.createElement('li');
         var state = document.createElement('span');
-        if (fn()) {
+
+        var pass = $.range(times).all(fn);
+        if (pass){
             state.style.color = 'green';
             state.textContent = 'Pass';
         } else {
@@ -131,6 +138,9 @@ Object.extend({
             newObj[o] = func(this[o]);
         }
         return newObj;
+    },
+    in: function(arr) {
+        arr.any(function(item) { return this === item; });
     }
 });
 
@@ -152,6 +162,20 @@ Array.extend({
     },
     pushArray: function(array) {
         Array.prototype.push.apply(this, array);
+    },
+    all: function(predicate) {
+        this.forEach(function(item) {
+            if (!predicate(item)) return false;
+        });
+
+        return true;
+    },
+    any: function(predicate) {
+        this.forEach(function(item) {
+            if (predicate(item)) return true;
+        });
+
+        return false;
     }
 });
 

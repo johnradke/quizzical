@@ -1,0 +1,35 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>quizzical.js tests</title>
+</head>
+<body>
+</body>
+<script src='bedrock.js'></script>
+<script src='quizzical.js'></script>
+<script>
+    $.test('getChoices() should return 4 things', 100, function() {
+        var choices = qz.getChoices(qz.quizzes[0]);
+        return choices.length === 4;
+    });
+
+    $.test('getChoices() should return all integers', 100, function() {
+        var choices = qz.getChoices(qz.quizzes[0]);
+        return choices.all(function (choice) {
+            return choice === parseInt(choice, 10);
+        });
+    });
+
+    $.test('getChoices() should be sorted', 100, function() {
+        var choices = qz.getChoices(qz.quizzes[0]);
+        var last = choices[0];
+        choices.slice(1).forEach(function(choice) {
+            console.log(last, choice);
+            if (choice <= last) return false;
+            last = choice;
+        });
+
+        return true;
+    });
+</script>
+</html>
