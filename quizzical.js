@@ -48,15 +48,18 @@ var qz = function() {
             $.id('newUnit').setText(props.units[1 - u]);
             choices.forEach(function(choice, i) {
                 choiceEls[i].setText(aFunc(choice) + props.unitAbbrevs[1 - u]);
-                
-                if (choice === target)
-                    choiceEls[i].classList.add('winner');
-                else
-                    choiceEls[i].classList.add('loser');
+                choiceEls[i].value = choice;
                 
                 choiceEls[i].onclick = function() {
                     this.classList.add('selected');
                     $.id('quiz').classList.add('answered');
+
+                    choiceEls.forEach(function(el) {
+                        if (el.value === target)
+                            el.classList.add('winner');
+                        else
+                            el.classList.add('loser');
+                    });
                 }
             });
             
