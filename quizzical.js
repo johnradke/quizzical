@@ -13,6 +13,8 @@ var qz = function() {
     var spacingMultiplier = .02;
     var spreadMultiplier = .05;
 
+    function noConvert(x) { return x; }
+
     function newQuestion(props) {
         $.id('quiz').style.opacity = 0;
 
@@ -21,7 +23,7 @@ var qz = function() {
             var target = $.rand(props.min, props.max);
 
             var spacing = Math.round(spacingMultiplier * (props.max - props.min));
-            var answers = [target];
+            var choices = [target];
             var exclusions = $.range(target - spacing, target + spacing);
 
             var spread = Math.round(spreadMultiplier * (props.max - props.min));
@@ -29,38 +31,32 @@ var qz = function() {
             var spreadMax = target + spread;
 
             for (var i = 0; i < 3; i++) {
-                var ans = $.randExclude(spreadMin, spreadMax, exclusions);
-                answers.push(ans);
-                exclusions.pushArray($.range(ans - spacing, target + spacing));
+                var choice = $.randExclude(spreadMin, spreadMax, exclusions);
+                choices.push(choice);
+                exclusions.pushArray($.range(choice - spacing, target + spacing));
             }
 
-            answers.sort(function(a, b) { return a - b; });
+            choices.sort(function(a, b) { return a - b; });
 
-            var ansEls = $.cl('answer');
-            var q, a;
+            var choiceEls = $.cl('choice');
             var u = $.rand(2);
-            if (u === 0) {
-                q = function(x) { return x; };
-                a = props.convert;
-            }
-            else {
-                q = props.convert;
-                a = function(x) { return x; };
-            }
+            var qFunc = u ? props.convert : noConvert;
+            var aFunc = u ? noConvert : props.convert;
 
-            $.id('query').setText(q(target));
+            $.id('query').setText(qFunc(target));
             $.id('oldUnit').setText(props.unitAbbrevs[u]);
             $.id('newUnit').setText(props.units[1 - u]);
-            answers.forEach(function(ans, i) {
-                ansEls[i].setText(a(ans) + props.unitAbbrevs[1 - u]);
+            choices.forEach(function(choice, i) {
+                choiceEls[i].setText(aFunc(choice) + props.unitAbbrevs[1 - u]);
                 
-                if (ans === target)
-                    ansEls[i].classList.add('winner');
+                if (choice === target)
+                    choiceEls[i].classList.add('winner');
                 else
-                    ansEls[i].classList.add('loser');
+                    choiceEls[i].classList.add('loser');
                 
-                ansEls[i].onclick = function() {
-                    ansEls.forEach(function(el, i) {
+                choiceEls[i].onclick = function() {
+                    this.classList.add('selected');
+                    choiceEls.forEach(function(el, i) {
                         el.classList.add('answered');
                     });
                 }

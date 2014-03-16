@@ -54,7 +54,7 @@ ul#answerList {
     font-weight: normal;
 }
 
-li.answer {
+li.choice {
     list-style-type: none;
     float: left;
     padding: 25px;
@@ -64,9 +64,6 @@ li.answer {
     border-radius: 20px;
     border-color: #336;
     width:220px;
-    cursor: pointer;
-
-
 
     transition: background .15s;
     -moz-transition: background .15s;
@@ -84,27 +81,34 @@ li.answer {
     user-select: none;
 }
 
-li.answer:hover:not(.answered) {
+li.choice:hover:not(.answered) {
     color: #eeeef5;
     background: #336;
+    cursor: pointer;
 }
 
-li.winner.answered {
+li.winner.answered:not(.selected) {
+    background: #7da url("checkmark.svg") no-repeat center center;
+    background-size: 140px 140px;
+    border-color: #7da;
+}
+
+li.winner.answered.selected {
     background: #0b3 url("checkmark.svg") no-repeat center center;
     background-size: 140px 140px;
     border-color: #0b3;
-    /*color: #eeeef5;*/
 }
 
-li.winner.answered:hover, li.loser.answered:hover, li.notclicked:hover {
-    cursor: default;
+li.loser.answered:not(.selected) {
+    background: #eab url("x.svg") no-repeat center center;
+    background-size: 140px 140px;
+    border-color: #eab
 }
 
-li.loser.answered {
+li.loser.answered.selected {
     background: #e34 url("x.svg") no-repeat center center;
     background-size: 140px 140px;
     border-color: #e34
-    /*color: #eeeef5;*/
 }
 
 li.notclicked {
