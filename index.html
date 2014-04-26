@@ -2,7 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Quizzic.al</title>
-    <link rel="stylesheet" type="text/css" href="quizzical.css">
+    <link rel="stylesheet" type="text/css" href="style/quizzical.css">
 </head>
 <body>
     <div id="quiz" style='opacity: 0;'>
@@ -20,18 +20,18 @@
                 <li class="choice">56°F</li>
                 <li class="choice">97°F</li>
                 <li class="choice">113°F</li>
-                </li>
+                <li id="next">Next Question</li>
             </ul>
         </div>
     </div>
 
     <footer>Copyright ©<span id="year"></span> <a href="http://www.johnradke.net">John Radke</a></footer>
 </body>
-<script src="bedrock.js"></script>
-<script src="quizzical.js"></script>
+<script src="script/wagon.js"></script>
+<script src="script/quizzical.js"></script>
 <script>
-    $.go(function() {
-        $.id('year').textContent = new Date().getFullYear();
+    w.go(function() {
+        w.id('year').textContent = new Date().getFullYear();
         qz.start();
     });
 </script>

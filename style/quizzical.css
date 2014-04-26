@@ -29,7 +29,7 @@ footer {
     font-weight: normal;
 }
 
-div#question {
+#question {
     margin-top: 40px;
     margin-bottom: 15px;
 }
@@ -42,9 +42,10 @@ div#question {
     display: inline-block;
     max-width: 644px;
     margin-top: 15px;
+    position: relative;
 }
 
-ul#answerList {
+#answerList {
     margin: 0;
     padding: 0;
 }
@@ -54,8 +55,17 @@ ul#answerList {
     font-weight: normal;
 }
 
-li.choice {
+li {
     list-style-type: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.choice {
     float: left;
     padding: 25px;
     margin:20px;
@@ -81,38 +91,73 @@ li.choice {
     user-select: none;
 }
 
-#quiz:not(.answered) li.choice:hover {
+#next {
+    list-style-type: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 300px;
+    height: 70px;
+    line-height: 70px;
+    margin: -35px 0 0 -150px;
+
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 20px;
+    border-color: #336;
+    font-size: 30px;
+    font-weight: bold;
+    background: #eeeef5;
+
+    transition: opacity .4s;
+    -moz-transition: opacity .4s;
+    -webkit-transition: opacity .4s;
+
+    opacity: 0;
+}
+
+#next:hover {
+    color: #eeeef5;
+    background: #336;
+}
+
+.answered #next {
+    cursor: pointer;
+    opacity: 1;
+}
+
+#quiz:not(.answered) .choice:hover {
     color: #eeeef5;
     background: #336;
     cursor: pointer;
 }
 
-#quiz.answered li.winner {
-    background: url("checkmark.svg") no-repeat center center;
+.answered .winner {
+    background: url("../image/checkmark.svg") no-repeat center center;
     background-size: 140px 140px;
 }
 
-#quiz.answered li.winner.selected {
+.answered .winner.selected {
     background-color: #0b3;
     border-color: #0b3;
 }
 
-#quiz.answered li.winner:not(.selected) {
+.answered .winner:not(.selected) {
     background-color: #7da;
     border-color: #7da;
 }
 
-#quiz.answered li.loser {
-    background: url("x.svg") no-repeat center center;
+.answered .loser {
+    background: url("../image/x.svg") no-repeat center center;
     background-size: 140px 140px;
 }
 
-#quiz.answered li.loser.selected {
+.answered .loser.selected {
     background-color: #e34;
     border-color: #e34;
 }
 
-#quiz.answered li.loser:not(.selected) {
+.answered .loser:not(.selected) {
     background-color: #eab;
     border-color: #eab;
 }
