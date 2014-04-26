@@ -19,6 +19,7 @@ window.qz = window.qz || {};
 
     function newQuestion(quiz) {
         w.id('quiz').style.opacity = 0;
+        resetCss();
 
         // use setTimeout to give the fade out time to act
         setTimeout(function() {
@@ -43,6 +44,7 @@ window.qz = window.qz || {};
 
                     var winner = false;
                     choiceEls.forEach(function(el) {
+                        el.onclick = null;
                         if (el.value === target) {
                             el.classList.add('winner');
                             
@@ -110,7 +112,6 @@ window.qz = window.qz || {};
         newQuestion(quizzes[0]);
 
         w.id('next').onclick = function() {
-            resetCss();
             newQuestion(quizzes[0]);
         };
     };
